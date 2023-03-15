@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave - Krokodillespill</title>
+</head>
+<body>
+
+  <div id="app"></div>
+    
+   
+   <script>
+
+     // Model
+
+     let numLeft;
+     let numRight;
+     let points = 0;
+
+   //view
+    randomNum()
+    function updateView() {
+      document.getElementById('app').innerHTML = /*html*/`
+      <h1>Krokodillespillet</h1><br>
+      <div id="textBox">
+      <p>Hvilket tall er størst? eller er de like?<br>
+        Bruk: <strong> ">" "<" </strong> eller <strong>"="</strong></p>
+        <p id="tallSize"> ${numLeft} ? ${numRight}</p>
+        <input id="operator" type="text"><br>
+        <p>Points: ${points}</p>
+        <button class="btn" onclick="check(operator.value)">Check</button>
+        <button class="btn" onclick="reset()">Reset</button>
+    </div>
+    
+    `;
+  }
+  updateView();
+
+  //controller
+      function check(operatorInput) {
+      if (operatorInput === ">" && numLeft > numRight) {
+        points++;
+     }
+      else if (operatorInput === "<" && numLeft < numRight) {
+        points++;
+    }
+    else if (operatorInput === "=" && numLeft === numRight) {
+        points++;
+    }
+    else {
+        points--;
+    }
+    randomNum();
+
+}
+
+  function randomNum() {
+    numLeft = Math.ceil(Math.random() * 10);
+    numRight = Math.ceil(Math.random() * 10);
+    updateView();
+}
+
+  function reset() {
+    points = 0;
+    randomNum()
+}
+   </script>
+
+</body>
+</html>
